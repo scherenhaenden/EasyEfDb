@@ -21,11 +21,13 @@ public class LoadConfiguration : ILoadConfiguration
         // load the environment variable
         var environment = _environmentLoader.GetEnvironmentVariable(_environmentKey);
         
+        Console.WriteLine($"Environment variable: {environment}");
+        
         // if the environment variable is null, set configModel to null and return error message
         if(environment == null)
         {
             
-            Environment.SetEnvironmentVariable(_environmentKey, "InMemory");
+            Environment.SetEnvironmentVariable(_environmentKey, "MySql");
             environment = _environmentLoader.GetEnvironmentVariable(_environmentKey);
             
             //error = $"Environment variable {_environmentKey} is null.";
@@ -46,7 +48,7 @@ public class LoadConfiguration : ILoadConfiguration
         var files = Directory.GetFiles(currentPath);
         
         // get the file that matches the environment variable
-        var file = files.FirstOrDefault(f => f.Contains(environment));
+        var file = files.FirstOrDefault(f => f.ToLower().Contains(environment.ToLower()));
         
         // if the file is null, set configModel to null and return error message
         if(file == null)

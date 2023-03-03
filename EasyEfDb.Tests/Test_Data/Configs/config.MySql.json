@@ -1,0 +1,5 @@
+{
+  "DbType": "MySql",
+  "DbName": "TestDb",  
+  "DbConnectionString": "server=localhost;Port=3308;database=library;user=root;password=mysql_test"
+}
