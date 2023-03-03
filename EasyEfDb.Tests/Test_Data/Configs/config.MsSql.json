@@ -1,0 +1,7 @@
+{
+  "DbType": "MSSQL",
+  "DbName": "TestDb",
+  "DbConnectionString": "Server=.;Database=TestDb;Trusted_Connection=True;"
+}
+
+

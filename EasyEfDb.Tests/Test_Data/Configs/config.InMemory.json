@@ -1,0 +1,7 @@
+{
+  "DbType": "InMemory",
+  "DbName": "TestDb",
+  "DbConnectionString": "Server=(localdb)\\mssqllocaldb;Database=TestDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+}
+
+

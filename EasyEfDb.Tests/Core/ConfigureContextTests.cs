@@ -5,24 +5,29 @@ using Microsoft.EntityFrameworkCore;
 
 using NUnit.Framework;
 using System;
+using EasyEfDb.Tests.Test_Data.Contexts.Domain;
+using EasyEfDb.Tests.Test_Tools;
+using EasyEfDb.Tests.Test_Tools.ConfigDbs;
+using TestContext = EasyEfDb.Tests.Test_Data.Contexts.TestContext;
 
 namespace EasyEfDb.Tests.Core;
 
 [TestFixture]
 public class ConfigureContextTests
 {
+    private ConfigTestModel _configTestModel;
+    // write setup here/
     public ConfigureContextTests()
     {
-        
+        _configTestModel = new ConfigTestModel();
     }
-    
-    // write setup here/
+
     [SetUp]
     public void Setup()
     {
+        ILoadConfiguration loadConfiguration = new LoadConfiguration();
+        _configTestModel = loadConfiguration.TryLoadConfigurationModel(out string error) ?? throw new Exception(error);
     }
-
-    
     
     [Test]
     public void GetContext_ReturnsDbContext()
@@ -31,7 +36,7 @@ public class ConfigureContextTests
         var configureContext = new ConfigureContext();
 
         // Act
-        var context = configureContext.GetContext<MyDbContext>( DatabaseType.InMemory, "databaseName");
+        var context = configureContext.GetContext<TestContext>( _configTestModel.DbTypeFromConfig, _configTestModel.DbName);
 
         // Assert
         Assert.IsInstanceOf<DbContext>(context);
@@ -43,7 +48,7 @@ public class ConfigureContextTests
     {
         // Arrange
         var configureContext = new ConfigureContext();
-        var context = configureContext.GetContext<MyDbContext>( DatabaseType.InMemory, "databaseName");
+        var context = configureContext.GetContext<TestContext>( DatabaseType.InMemory, "databaseName");
         var user = new User { Name = "John Doe", Email = "john.doe@example.com" };
 
         // Act
@@ -62,7 +67,7 @@ public class ConfigureContextTests
     {
         // Arrange
         var configureContext = new ConfigureContext();
-        var context = configureContext.GetContext<MyDbContext>( DatabaseType.InMemory, "databaseName");
+        var context = configureContext.GetContext<TestContext>( DatabaseType.InMemory, "databaseName");
         var user = new User { Name = "Jane Doe", Email = "jane.doe@example.com" };
         
 
@@ -87,7 +92,7 @@ public class ConfigureContextTests
     {
         // Arrange
         var configureContext = new ConfigureContext();
-        var context = configureContext.GetContext<MyDbContext>( DatabaseType.InMemory, "databaseName");
+        var context = configureContext.GetContext<TestContext>( DatabaseType.InMemory, "databaseName");
         var product = new Product { Name = "Product A", Price = 9.99m };
 
         // Act
@@ -101,42 +106,3 @@ public class ConfigureContextTests
         Assert.AreEqual(product.Price, savedProduct.Price);
     }
 }
-
-public class MyDbContext : DbContext
-{
-    public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
-    {
-    }
-    
-    public MyDbContext(DbContextOptions<DbContext> options): base(options) 
-    {
-    }
-
-    public DbSet<User> Users { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<Product> Products { get; set; }
-}
-
-public class User
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-}
-
-public class Order
-{
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public User User { get; set; }
-    public DateTime OrderDate { get; set; }
-    public ICollection<Product> Products { get; set; }
-}
-
-public class Product
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public decimal Price { get; set; }
-}
-
