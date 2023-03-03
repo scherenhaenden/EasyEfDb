@@ -2,9 +2,9 @@ name: NUnit Test Database
 
 on:
   push:
-    branches: [ 'TestDbs' ]
+    branches: [ '*' ]
   pull_request:
-    branches: [ 'TestDbs' ]
+    branches: [ '*' ]
 
 jobs:
   build:
