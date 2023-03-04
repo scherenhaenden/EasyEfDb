@@ -41,8 +41,14 @@ public class LoadConfiguration : ILoadConfiguration
         
         // get current path
         var currentPath = Directory.GetCurrentDirectory();
+        
+        // print current path
+        Console.WriteLine($"Current path: {currentPath}");
 
         currentPath += "/../../../Test_Data/Configs/"; 
+        
+        //print current path
+        Console.WriteLine($"Current path for Configs: {currentPath}");
         
         // get files in current path
         var files = Directory.GetFiles(currentPath);
