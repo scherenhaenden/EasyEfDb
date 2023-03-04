@@ -27,7 +27,7 @@ public class LoadConfiguration : ILoadConfiguration
         if(environment == null)
         {
             
-            Environment.SetEnvironmentVariable(_environmentKey, "MySql");
+            Environment.SetEnvironmentVariable(_environmentKey, "InMemory");
             environment = _environmentLoader.GetEnvironmentVariable(_environmentKey);
             
             //error = $"Environment variable {_environmentKey} is null.";

@@ -39,7 +39,7 @@ public class ConfigureContextTests
         var configureContext = new ConfigureContext();
 
         // Act
-        var context = configureContext.GetContext<TestContext>( _configTestModel.DbTypeFromConfig, _configTestModel.DbName);
+        var context = configureContext.GetContext<TestContext>( _configTestModel.DbTypeFromConfig, _configTestModel.DbConnectionString);
 
         // Assert
         Assert.IsInstanceOf<DbContext>(context);
