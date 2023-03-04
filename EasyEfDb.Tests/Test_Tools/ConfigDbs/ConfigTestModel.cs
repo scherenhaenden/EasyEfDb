@@ -19,7 +19,7 @@ public class ConfigTestModel
         var databaseType = DbType switch
         {
             "InMemory" => DatabaseType.InMemory,
-            //"SqlServer" => DatabaseType.SqlServer,
+            "MsSql" => DatabaseType.MsSql,
             "PostgreSql" => DatabaseType.PostgreSql,
             "MySql" => DatabaseType.MySql,
             _ => throw new Exception("Database type not found." + DbType)
