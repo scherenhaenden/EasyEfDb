@@ -53,6 +53,12 @@ public class LoadConfiguration : ILoadConfiguration
         // get files in current path
         var files = Directory.GetFiles(currentPath);
         
+        // print files
+        foreach (var item in files)
+        {
+            Console.WriteLine($"File: {item}");
+        }
+        
         // get the file that matches the environment variable
         var file = files.FirstOrDefault(f => f.ToLower().Contains(environment.ToLower()));
         
