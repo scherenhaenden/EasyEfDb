@@ -13,6 +13,9 @@ public class ConfigTestModel
 
     private DatabaseType GetDatabaseType()
     {
+        // print current dbtype 
+        Console.WriteLine($"Current DbType: {DbType}");
+        
         var databaseType = DbType switch
         {
             "InMemory" => DatabaseType.InMemory,
