@@ -1,5 +1,5 @@
 {
-  "DbType": "MSSQL",
+  "DbType": "MySql",
   "DbName": "TestDb",
   "DbConnectionString": "Server=.;Database=TestDb;Trusted_Connection=True;"
 }
