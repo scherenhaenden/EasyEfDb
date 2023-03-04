@@ -22,7 +22,7 @@ public class ConfigTestModel
             //"SqlServer" => DatabaseType.SqlServer,
             "PostgreSql" => DatabaseType.PostgreSql,
             "MySql" => DatabaseType.MySql,
-            _ => throw new Exception("Database type not found.")
+            _ => throw new Exception("Database type not found." + DbType)
         };
         return databaseType;
     }
