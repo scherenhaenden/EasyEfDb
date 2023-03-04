@@ -22,7 +22,8 @@ public class ConfigureContextTests
         _configTestModel = new ConfigTestModel();
     }
 
-    [SetUp]
+    // write setup here and run only once
+    [OneTimeSetUp]
     public void Setup()
     {
         ILoadConfiguration loadConfiguration = new LoadConfiguration();
