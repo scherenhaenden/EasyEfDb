@@ -27,6 +27,8 @@ public class ConfigureContextTests
     {
         ILoadConfiguration loadConfiguration = new LoadConfiguration();
         _configTestModel = loadConfiguration.TryLoadConfigurationModel(out string error) ?? throw new Exception(error);
+        // print if it worked till now
+        Console.WriteLine($"ConfigTestModel: {_configTestModel.DbTypeFromConfig} {_configTestModel.DbName}");
     }
     
     [Test]
