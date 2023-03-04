@@ -4,9 +4,9 @@ namespace EasyEfDb.Tests.Test_Tools.ConfigDbs;
 
 public class ConfigTestModel
 {
-    public string DbType { get; set; }
-    public string DbName { get; set; }
-    public string DbConnectionString { get; set; }
+    public string DbType { get; set; } = null!;
+    public string DbName { get; set; }= null!;
+    public string DbConnectionString { get; set; }= null!;
 
     public DatabaseType DbTypeFromConfig => GetDatabaseType();
 

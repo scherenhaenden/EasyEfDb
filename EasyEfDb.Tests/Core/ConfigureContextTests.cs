@@ -1,13 +1,8 @@
 using EasyEfDb.Core;
-using Microsoft.EntityFrameworkCore;
-
-
-
-using NUnit.Framework;
-using System;
 using EasyEfDb.Tests.Test_Data.Contexts.Domain;
 using EasyEfDb.Tests.Test_Tools;
 using EasyEfDb.Tests.Test_Tools.ConfigDbs;
+using Microsoft.EntityFrameworkCore;
 using TestContext = EasyEfDb.Tests.Test_Data.Contexts.TestContext;
 
 namespace EasyEfDb.Tests.Core;
@@ -61,8 +56,15 @@ public class ConfigureContextTests
         // Assert
         var savedUser = context.Users.FirstOrDefault(u => u.Id == user.Id);
         Assert.IsNotNull(savedUser);
-        Assert.AreEqual(user.Name, savedUser.Name);
-        Assert.AreEqual(user.Email, savedUser.Email);
+        if (savedUser?.Name != null)
+        {
+            Assert.That(savedUser.Name, Is.EqualTo(user.Name));
+            Assert.That(savedUser.Email, Is.EqualTo(user.Email));
+        }
+        else
+        {
+            Assert.Fail();
+        }
     }
 
     [Test]
@@ -86,8 +88,16 @@ public class ConfigureContextTests
         // Assert
         var savedOrder = context.Orders.FirstOrDefault(o => o.Id == order.Id);
         Assert.IsNotNull(savedOrder);
-        Assert.AreEqual(user.Id, savedOrder.UserId);
-        Assert.AreEqual(order.OrderDate, savedOrder.OrderDate);
+        Assert.IsNotNull(user);
+        if (savedOrder != null)
+        {
+            Assert.That(savedOrder.UserId, Is.EqualTo(user.Id));
+            Assert.That(savedOrder.OrderDate, Is.EqualTo(order.OrderDate));
+        }
+        else
+        {
+            Assert.Fail();
+        }
     }
 
     [Test]
@@ -105,7 +115,14 @@ public class ConfigureContextTests
         // Assert
         var savedProduct = context.Products.FirstOrDefault(p => p.Id == product.Id);
         Assert.IsNotNull(savedProduct);
-        Assert.AreEqual(product.Name, savedProduct.Name);
-        Assert.AreEqual(product.Price, savedProduct.Price);
+        if (savedProduct != null)
+        {
+            Assert.That(savedProduct.Name, Is.EqualTo(product.Name));
+            Assert.That(savedProduct.Price, Is.EqualTo(product.Price));
+        }
+        else
+        {
+            Assert.Fail();
+        }
     }
 }
