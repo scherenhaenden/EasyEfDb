@@ -18,6 +18,9 @@ public class LoadConfiguration : ILoadConfiguration
     
     public ConfigTestModel? TryLoadConfigurationModel(out string error)
     {
+        //print init load
+        Console.WriteLine("Init load");
+        
         // load the environment variable
         var environment = _environmentLoader.GetEnvironmentVariable(_environmentKey);
         
